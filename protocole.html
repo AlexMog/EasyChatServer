@@ -1,0 +1,106 @@
+<pre>
+<b>Simple Tchat Protocol</b>
+Le protocole Simple Tchat Protocol permet la gestion et l'implémentation d'un tchat de manière simple et efficasse.
+
+<b>Version du protocole: 093</b>
+
+<b>Séparateurs</b>
+Toutes les commandes se finissent par \r\n.
+Tous les arguments sont séparés par un espace (" ")
+Les commandes sont séparées des arguments par un espace (" ")
+
+
+<b>Format des commandes</b>
+Le format des commandes est le suivant: COMMANDE [argument1] [argument2] ...
+
+<b>Lors d'une connection d'un nouveau Client</b>
+Lors d'une nouvelle connection, le serveur attends la commande CLIENT suivie de la commande LOGIN pour identifier le client. Puis il lui envois la command LIST suivi des logs (commande LOG).
+
+<b>Commandes (COMMANDE - version du protocole)</b>
+<b>CLIENT - 092</b>
+arguments: [client] [protocol_version]
+description: CLIENT permet de savoir quel client vous utilisez, ainsi que la version du protocole que vous utilisez (très utile pour la commande WHOIS)
+
+<b>PRIVMSG - 086</b>
+arguments: client->serveur: [pseudo] [message] ; serveur->client: [sender] [message]
+description: Envois un message privé à la personne [pseudo].
+
+<b>WHOIS - 092</b>
+arguments:  client->serveur: [pseudo d'un utilisateur] ; serveur->client: [ID_client] [client_utilisé] [type(0=user, 1=modo, 2=admin)]
+description: Permet d'avoir plus d'informations sur l'utilisateur [pseudo].
+
+<b>ADDADMIN - 092</b>
+arguments: [pseudo]
+description: Ajoute un administrateur à la liste des administrateurs.
+
+<b>REMADMIN - 092</b>
+arguments: [pseudo]
+description: Supprime un administrateur de la liste des administrateurs.
+
+<b>LOG - 093</b>
+arguments: [pseudo] [log]
+descrption: Envois un log des derniers messages reçu. Par défaut, envois les 20 derniers messages.
+
+<b>ADDOP - 092</b>
+arguments: [pseudo]
+description: Ajoute un opérateur à la liste des opérateurs.
+
+<b>REMOP - 092</b>
+arguments: [pseudo]
+description: Supprime un opérateur de la liste des opérateurs.
+
+<b>KICK - 092</b>
+arguments: [pseudo] [raison]
+description: Déconnecte l'utilisateur [pseudo] du serveur.
+
+<b>BAN - 092</b>
+arguments: [pseudo] [raison]
+description: Bannit l'utilisateur du serveur et le kick.
+
+<b>UNBAN - 092</b>
+arguments: [pseudo]
+description: Débannit l'utilisateur.
+
+<b>LOGIN - 001</b>
+arguments: [pseudo] [mot_de_passe]
+description: permet l'authentification d'un utilisateur. Le mot_de_passe doit être encodé en MD5.
+
+<b>LIST - 001</b>
+arguments: [liste_des_utilisateurs:ID_utilisateur:type_utilisateur(0:normal,1:operator,2:admin)_séparés_par_des_espaces]
+description: envois la liste des utilisateurs actuellement connectés, si le client envois juste LIST au serveur, celui-ci réponds avec la liste des utilisateurs. (exemple: LIST AlexMog:45:2 Azad:1:2) (le buffer étant de 1024, plusieurs LIST peuvent êtres envoyés à la suite.)
+
+<b>JOIN - 001</b>
+arguments: [pseudo_utilisateur:id_utilisateur:type_utilisateur]
+description: Un utilisateur viens de se connecter au tchat. (envoyé par le serveur aux clients)
+
+<b>MSG - 001</b>
+arguments: client->serveur: [message] ; serveur->client: [pseudo] [message]
+description: Permet d'envoyer un message au tchat (envoyé par le client). Permet de définir si un message a été reçu (envoyé par le serveur). Dans le premier cas, contient uniquement le message, dans le second, contient le pseudo suivi du message.
+
+<b>QUIT - 001</b>
+arguments: [pseudo]
+descrption: Prévient les clients que [pseudo] a quitté le tchat.
+
+<b>ERROR - 001</b>
+arguments: [error_code] [error_message]
+descrption: Envoyé aux clients en cas d'erreur.
+
+<b>OK - 001</b>
+arguments: N/A
+descrption: Réponse en cas de réussite d'une commande.
+
+
+<b>Error codes</b>
+<b>0:</b> Commande non trouvée
+<b>1:</b> Arguments manquants à la commande
+<b>2:</b> Authentification failed
+<b>3:</b> La commande CLIENT n'a pas été exécutée
+<b>4:</b> Version du protocole différente
+<b>5:</b> Vous n'avez pas les droits pour utiliser cette commande
+<b>6:</b> L'utilisateur est déjà OP/Admin
+<b>7:</b> L'utilisateur n'est pas OP/Admin
+<b>8:</b> Utilisateur déjà bannit
+<b>9:</b> Utilisateur introuvable
+<b>10:</b> Ban, suivi de la raison
+<b>500:</b> Internal error
+</pre>
