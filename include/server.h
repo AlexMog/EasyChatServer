@@ -39,6 +39,6 @@ int	verify_username_by_user_list(void *elem, void *comp);
 void	addlog(t_datas *datas, char *format, ...);
 int	is_numeric(char *str);
 int	read_configs(t_datas *datas);
-void	add_to_log(t_datas *datas, char *message);
+void	add_to_log(t_datas *datas, char *message, char *user);
 
 #endif /* !SERVER_H_ */

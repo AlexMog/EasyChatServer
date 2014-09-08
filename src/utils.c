@@ -13,6 +13,7 @@
 #include <stdio.h>
 #include "server.h"
 #include "users.h"
+#include "logs.h"
 
 /***
  *** Utility functions
@@ -275,14 +276,17 @@ int		rem_banned(t_datas *datas, char *username)
 /***
  *** Logs command functions
  ***/
-void		add_to_log(t_datas *datas, char *message)
+void		add_to_log(t_datas *datas, char *message, char *user)
 {
-  if (datas->logs_size == 0)
+  if (datas->max_logs == 0)
     return ;
-  if (list_add(&datas->logs, message, strlen(message)))
+  t_logs	log;
+  strcpy(log.message, message);
+  strcpy(log.login, user);
+  if (!list_add_end(&datas->logs, &log, sizeof(t_logs)))
     {
       if (datas->logs_size >= datas->max_logs)
-	list_rem_back(&datas->logs);
+	list_rem_front(&datas->logs);
       else
 	datas->logs_size++;
     }

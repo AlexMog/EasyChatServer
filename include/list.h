@@ -18,6 +18,7 @@ typedef struct	s_list
 }		t_list;
 
 int		list_add(t_list **list, void *datas, size_t data_size);
+int		list_add_end(t_list **list, void *datas, size_t data_size);
 int		list_rem_front(t_list **list);
 int		list_rem_cond(t_list **list, void *comp,
 			      int (*fptr)(void *, void *));

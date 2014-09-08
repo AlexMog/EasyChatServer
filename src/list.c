@@ -15,6 +15,29 @@
 #include "list.h"
 #include "server.h"
 
+int		list_add_end(t_list **list, void *datas, size_t data_size)
+{
+  t_list	*tmp;
+
+  if ((tmp = malloc(sizeof(t_list))) == NULL)
+    return (1);
+  if ((tmp->datas = malloc(data_size)) == NULL)
+    return (1);
+  memcpy(tmp->datas, datas, data_size);
+  tmp->next = NULL;
+  if (*list == NULL)
+    *list = tmp;
+  else
+    {
+      t_list	*elem = *list;
+
+      while (elem && elem->next)
+	elem = elem->next;
+      elem->next = tmp;
+    }
+  return (0);
+}
+
 int		list_add(t_list **list, void *datas, size_t data_size)
 {
   t_list	*next;

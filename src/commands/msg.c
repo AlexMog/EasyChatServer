@@ -31,5 +31,5 @@ void		exec_msg(t_users *user, t_datas *datas, char *msg)
   send_to_all(datas, buffer, 0, user);
   sendmessage(user->state, "OK");
   /* Adding to logs */
-  add_to_log(datas, &buffer[3]);
+  add_to_log(datas, msg, user->username);
 }
