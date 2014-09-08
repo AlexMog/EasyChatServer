@@ -5,7 +5,7 @@
 ** Login   <alexandre.moghrabi@epitech.eu>
 ** 
 ** Started on  Wed May 14 19:45:52 2014 Moghrabi Alexandre
-** Last update Fri Jul 18 16:34:54 2014 Moghrabi Alexandre
+** Last update Mon Sep  8 16:32:31 2014 Moghrabi Alexandre
 */
 
 #include <stdarg.h>
@@ -270,4 +270,22 @@ int		verify_banned(t_datas *datas, char *username, char *reason)
 int		rem_banned(t_datas *datas, char *username)
 {
   return (list_rem_cond(&datas->banned, username, &verify_ban_username));
+}
+
+/***
+ *** Logs command functions
+ ***/
+void		add_to_log(t_datas *datas, char *message)
+{
+  if (datas->logs_size == 0)
+    return ;
+  if (list_add(&datas->logs, message, strlen(message)))
+    {
+      if (datas->logs_size >= datas->max_logs)
+	list_rem_back(&datas->logs);
+      else
+	datas->logs_size++;
+    }
+  else
+    fprintf(stderr, "ERROR: Cannot add the message to the log list.\n");
 }

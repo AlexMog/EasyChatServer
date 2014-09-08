@@ -5,7 +5,7 @@
 ** Login   <alexmog@epitech.net>
 ** 
 ** Started on  Thu May  8 17:23:52 2014 Moghrabi Alexandre
-** Last update Fri Jul 18 16:36:33 2014 Moghrabi Alexandre
+** Last update Mon Sep  8 16:38:30 2014 Moghrabi Alexandre
 */
 
 #ifndef SERVER_H_
@@ -14,7 +14,8 @@
 # include "users.h"
 # include "datas.h"
 
-# define API_URL	("http://api.melinyel.net/alexmog/api.php?name=%s&password=%s")
+# define SERVER_VERSION	(93)
+
 # define CONFIGS_FILE	("configs.cfg")
 
 /* server_interpretator.c */
@@ -38,5 +39,6 @@ int	verify_username_by_user_list(void *elem, void *comp);
 void	addlog(t_datas *datas, char *format, ...);
 int	is_numeric(char *str);
 int	read_configs(t_datas *datas);
+void	add_to_log(t_datas *datas, char *message);
 
 #endif /* !SERVER_H_ */

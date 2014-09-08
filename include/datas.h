@@ -5,7 +5,7 @@
 ** Login   <alexmog@epitech.net>
 ** 
 ** Started on  Thu May  8 16:55:25 2014 Moghrabi Alexandre
-** Last update Fri Jul 18 16:57:55 2014 Moghrabi Alexandre
+** Last update Mon Sep  8 16:29:07 2014 Moghrabi Alexandre
 */
 
 #ifndef DATAS_H_
@@ -21,6 +21,8 @@ typedef struct
   t_list		*banned;
   t_list		*admins;
   t_list		*opers;
+  t_list		*logs;
+  int			logs_size;
   pthread_mutex_t	mutex;
   int			version;
   char			logfile[80];
@@ -30,6 +32,7 @@ typedef struct
   char			admin_file[81];
   char			ban_file[81];
   char			op_file[81];
+  int			max_logs;
 } t_datas;
 
 #endif /* !DATAS_H_ */

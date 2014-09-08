@@ -5,7 +5,7 @@
 ** Login   <alexandre.moghrabi@epitech.eu>
 ** 
 ** Started on  Thu May  8 19:14:04 2014 Moghrabi Alexandre
-** Last update Thu May 15 13:41:49 2014 Moghrabi Alexandre
+** Last update Mon Sep  8 16:19:15 2014 Moghrabi Alexandre
 */
 
 #include <websock/websock.h>
@@ -30,4 +30,6 @@ void		exec_msg(t_users *user, t_datas *datas, char *msg)
   snprintf(buffer, 1024, "MSG %s %s", user->username, msg);
   send_to_all(datas, buffer, 0, user);
   sendmessage(user->state, "OK");
+  /* Adding to logs */
+  add_to_log(datas, &buffer[3]);
 }

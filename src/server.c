@@ -5,7 +5,7 @@
 ** Login   <alexandre.moghrabi@epitech.eu>
 ** 
 ** Started on  Thu May  8 16:44:40 2014 Moghrabi Alexandre
-** Last update Fri Jul 18 16:57:07 2014 Moghrabi Alexandre
+** Last update Mon Sep  8 16:38:12 2014 Moghrabi Alexandre
 */
 
 #include <pthread.h>
@@ -147,6 +147,7 @@ void	clean_datas(t_datas *datas)
   list_clean(&datas->banned);
   list_clean(&datas->admins);
   list_clean(&datas->opers);
+  list_clean(&datas->logs);
 }
 
 int	main(void)
@@ -155,7 +156,7 @@ int	main(void)
   libwebsock_context *ctx = NULL;
 
   memset(&datas, 0, sizeof(t_datas));
-  datas.version = 92;
+  datas.version = SERVER_VERSION;
   ctx = libwebsock_init();
   if (ctx == NULL)
     {
@@ -169,7 +170,6 @@ int	main(void)
       clean_datas(&datas);
       return (1);
     }
-  printf("dafaq? %s, %s, %s, %s, %s\n", datas.port, datas.auth_link, datas.admin_file, datas.ban_file, datas.op_file);
   printf("Initialisation finished.\nListening on port %s\n", datas.port);
   addlog(&datas, "server listening on port %s\n", datas.port);
   libwebsock_bind(ctx, "0.0.0.0", datas.port);

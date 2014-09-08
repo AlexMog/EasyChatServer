@@ -5,7 +5,7 @@
 ** Login   <alexandre.moghrabi@epitech.eu>
 ** 
 ** Started on  Tue Apr  8 17:08:40 2014 Moghrabi Alexandre
-** Last update Thu May 15 15:27:34 2014 Moghrabi Alexandre
+** Last update Mon Sep  8 16:28:22 2014 Moghrabi Alexandre
 */
 
 #include <string.h>
@@ -138,4 +138,27 @@ void		list_clean(t_list **list)
       elem = next;
     }
   *list = NULL;
+}
+
+void		list_rem_back(t_list **list)
+{
+  t_list	*elem = *list;
+  t_list	*tmp = NULL;
+
+  while (elem)
+    {
+      if (elem->next == NULL)
+	{
+	  if (elem->datas != NULL)
+	    free(elem->datas);
+	  free(elem);
+	  if (tmp != NULL)
+	    tmp->next = NULL;
+	  else
+	    *list = NULL;
+	  return ;
+	}
+      tmp = elem;
+      elem = elem->next;
+    }
 }

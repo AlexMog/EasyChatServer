@@ -5,7 +5,7 @@
 ** Login   <alexandre.moghrabi@epitech.eu>
 ** 
 ** Started on  Thu May  8 19:13:45 2014 Moghrabi Alexandre
-** Last update Fri Jul 18 16:31:52 2014 Moghrabi Alexandre
+** Last update Mon Sep  8 16:44:09 2014 Moghrabi Alexandre
 */
 
 #include <pthread.h>
@@ -16,6 +16,7 @@
 #include "users.h"
 #include "web_reader.h"
 #include "commands.h"
+#include "logs.h"
 
 void		exec_login(t_users *user, t_datas *datas, char *args)
 {
@@ -88,4 +89,14 @@ void		exec_login(t_users *user, t_datas *datas, char *args)
   send_to_all(datas, buffer, 1, NULL);
   sendmessage(user->state, "OK");
   exec_list(user, datas, args);
+  /* Sending logs */
+  t_list *elem = datas->logs;
+  while (elem)
+    {
+      t_logs *log = ((t_logs*)elem->datas);
+      snprintf(banreason, 1023, "LOG %s %s", log->login,
+	       log->message);
+      sendmessage(user->state, banreason);
+      elem = elem->next;
+    }
 }

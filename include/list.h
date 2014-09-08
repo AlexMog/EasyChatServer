@@ -5,7 +5,7 @@
 ** Login   <alexmog@epitech.net>
 ** 
 ** Started on  Wed May 14 20:13:27 2014 Moghrabi Alexandre
-** Last update Wed May 14 20:31:53 2014 Moghrabi Alexandre
+** Last update Mon Sep  8 16:25:58 2014 Moghrabi Alexandre
 */
 
 #ifndef LIST_H_
@@ -26,5 +26,6 @@ void		*list_get_cond(t_list *list, void *comp,
 void		*list_get_from_index(t_list *list, void *comp, int *index,
 				     int (*fptr)(void *, void *));
 void		list_clean(t_list **list);
+void		list_rem_back(t_list **list);
 
 #endif /* !LIST_H_ */

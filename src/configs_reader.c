@@ -5,7 +5,7 @@
 ** Login   <alexandre.moghrabi@epitech.eu>
 ** 
 ** Started on  Fri Jul 18 15:49:22 2014 Moghrabi Alexandre
-** Last update Fri Jul 18 16:55:19 2014 Moghrabi Alexandre
+** Last update Mon Sep  8 16:14:05 2014 Moghrabi Alexandre
 */
 
 #include <stdlib.h>
@@ -41,7 +41,7 @@ int		interprete_line(t_datas *datas, char *line)
       value = strtok(NULL, "\0");
       if (strcmp(option, "server_port") == 0)
 	{
-	  if (!is_numeric(value))
+	  if (value == NULL || !is_numeric(value))
 	    {
 	      fprintf(stderr, "ERROR: value must be numeric.");
 	      return (1);
@@ -51,6 +51,11 @@ int		interprete_line(t_datas *datas, char *line)
 	}
       else if (strcmp(option, "auth_use") == 0)
 	{
+	  if (value == NULL)
+	    {
+	      fprintf(stderr, "ERROR: A value must be set.");
+	      return (1);
+	    }
 	  if (value[0] == '0')
 	    datas->auth_use = 0;
 	  else if (value[0] == '1')
@@ -97,6 +102,16 @@ int		interprete_line(t_datas *datas, char *line)
 	    }
 	  strcpy(datas->ban_file, value);
 	  printf("CONFIGS: BanFile: %s\n", datas->ban_file);
+	}
+      else if (strcmp(option, "max_logs") == 0)
+	{
+	  if (value == NULL || !is_numeric(value))
+	    {
+	      fprintf(stderr, "ERROR: No number defined.");
+	      return (1);
+	    }
+	  datas->max_logs = atoi(value);
+	  printf("CONFIGS: MaxLogs: %d\n", datas->max_logs);
 	}
       else
 	fprintf(stderr, "WARNING: Option '%s' not defined.\n", option);
