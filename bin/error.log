@@ -1,0 +1,6 @@
+==20556== Memcheck, a memory error detector
+==20556== Copyright (C) 2002-2011, and GNU GPL'd, by Julian Seward et al.
+==20556== Using Valgrind-3.7.0 and LibVEX; rerun with -h for copyright info
+==20556== Command: ./server
+==20556== 
+WARNING: Option 'server_use_ssl' not defined.

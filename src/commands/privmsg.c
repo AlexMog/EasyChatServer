@@ -51,7 +51,7 @@ void		exec_privmsg(t_users *user, t_datas *datas, char *args)
 						userc, &start,
 						&test_username)) != NULL)
     {
-      snprintf(buffer, 750, "PRIVMSG %s %s", userd->username, message);
+      snprintf(buffer, 750, "PRIVMSG %s %s", user->username, message);
       sendmessage(userd->state, buffer);
     }
   if (start == 0)
