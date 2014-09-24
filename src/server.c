@@ -155,10 +155,10 @@ int	main(void)
   t_datas	datas;
   libwebsock_context *ctx = NULL;
 
-  printf("EasyChatServer version 093, Copyright (C) 2014 Alexandre Moghrabi\
-	EasyChatServer comes with ABSOLUTELY NO WARRANTY\
-	This is free software, and you are welcome to redistribute it\
-	under certain conditions; read the file 'COPYING' for details.");
+  printf("EasyChatServer version 093, Copyright (C) 2014 Alexandre Moghrabi\n\
+EasyChatServer comes with ABSOLUTELY NO WARRANTY\n\
+This is free software, and you are welcome to redistribute it\n\
+under certain conditions; read the file 'COPYING' for details.");
   memset(&datas, 0, sizeof(t_datas));
   datas.version = SERVER_VERSION;
   ctx = libwebsock_init();
